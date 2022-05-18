@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <title>GMS</title>
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>Greenhouse Monitoring System</h1>
+            </header>
+            <section class="graphs">
+                {% block content %}
+                <div class="graph">
+                    <canvas id="Chart"></canvas>  
+                </div>
+                {% endblock %}
+                <div class="form">
+                    
+                    <h2> Control the Regulation Of Water</h2>
+                    <form method="POST" >
+                    {% csrf_token %}
+                    <input type="submit" class="btn"  name="btn" value="ON">
+                    <input type="submit" class="btn"  name="btn" value="OFF">
+                </form>
+                </div>
+            </section>
+            <br>
+        </main>
+    </body>
+    <script>
+    var data = JSON.parse("{{data|escapejs}}");
+    const temprature = new Chart(document.getElementById('Chart'), {
+        type: 'line',
+        data: {
+            labels: data["x"],
+            datasets: [
+            {
+                label: "temp",
+                data: data["tmp"],
+                    fill: false,
+                    backgroundColor: "#FFF",
+                    borderColor: "#FAF",
+                    cubicInterpolationMode: 'monotone',
+                    tension: 0.4,
+            },
+            {
+                label: "Hue",
+                data: data["hue"],
+                    fill: false,
+                    backgroundColor: "#FFF",
+                    borderColor: "#FFA",
+                    cubicInterpolationMode: 'monotone',
+                    tension: 0.4
+            },
+            {
+                label: "moist",
+                data: data["moist"],
+                    fill: false,
+                    backgroundColor: "#FFF",
+                    borderColor: "#AFF",
+                    cubicInterpolationMode: 'monotone',
+                    tension: 0.4
+            },
+            ]
+        }
+    }
+    );
+    
+    </script>
+</html>
