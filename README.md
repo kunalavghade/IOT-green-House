@@ -7,14 +7,14 @@ It monitors environmental parameters such as humidity, temperature , moisture an
 Made by Python Django framework
 Deployed by Heroku Platform
 
-Cloud Platform:
+**Cloud Platform** :
 Thingspeak IoT Platform 
 
-Hardware Unit:
+**Hardware Unit** :
 NodeMcu ESP8266
 DHT11 Sensor
 Moisture Sensor
 Relay
 
-Website Link:
+**Website Link**:
 ## https://iot-green-house.herokuapp.com/
